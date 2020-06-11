@@ -1,0 +1,19 @@
+.drop-area {
+    margin: auto;
+    transition: margin 0.5s;
+    border: 2px dashed black;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    background-color: aliceblue;
+}
+
+.drop-area.file-over {
+    border-color: cornflowerblue;
+}
+
+.drop-message {
+    pointer-events: none;
+    margin: auto;
+    color: cadetblue;
+}

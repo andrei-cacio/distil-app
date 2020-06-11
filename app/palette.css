@@ -1,0 +1,27 @@
+.palette-container {
+    margin: 50px auto;
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+}
+
+.palette {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    margin: 5px;
+    border-radius: 8px;
+    transition: all 0.5s;
+}
+
+.palette:hover {
+    transition: none;
+    border: 3px solid black;
+    box-sizing: border-box;
+}
+
+.palette .copied-message {
+    margin: auto;
+}
+
+

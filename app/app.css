@@ -1,0 +1,12 @@
+.app {
+    display: flex;
+    flex-direction: column;
+}
+
+html, body, #app, .app {
+    height: 100%;
+}
+
+body {
+    transition: all 0.5s;
+}
