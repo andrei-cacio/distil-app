@@ -9,9 +9,7 @@ import "./app.css";
 const App = () => {
   const [colors, setColors] = useState([]);
   const handleImageReady = useCallback((buffer) => {
-    console.log("processing");
     setColors(distil(new Uint8Array(buffer)).map(rgbArrayToRgb));
-    console.log("done");
   }, []);
 
   return (

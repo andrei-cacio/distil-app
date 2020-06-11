@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from 'prop-types';
 import "./drop-area.css";
+import {blobToBuffer} from "./utils";
 
 const DROP_STATES = {
   HOVER: "HOVER",
@@ -34,7 +35,7 @@ const DropArea = ({ allowedFiles, onFile }) => {
     const file = e.dataTransfer.files[0];
 
     if (allowedFiles.includes(file.type)) {
-      file.arrayBuffer().then(buffer => onFile(buffer));
+      blobToBuffer(file).then(buffer => onFile(buffer));
     } else {
       alert('Only JPEG allowed');
     }

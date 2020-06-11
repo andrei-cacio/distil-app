@@ -1,6 +1,6 @@
 .drop-area {
     margin: auto;
-    transition: margin 0.5s;
+    transition: all 0.5s;
     border: 2px dashed black;
     width: 200px;
     height: 200px;
