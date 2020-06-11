@@ -1,34 +1,17 @@
 import React, { useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {  rgbArrayToRgb } from "./utils";
 
 import "./palette.css";
-
-// Check if a color item passes the RGB like array validator
-// valid: [r, g, b] where {r, g, b} are in the range of [0, 255]
-const RgbType = PropTypes.arrayOf((propValue, key) => {
-  if (key > 2 || !Array.isArray(propValue)) {
-    return new Error(
-        'Invalid prop colors RGB supplied to' +
-        'Palette. Validation failed.'
-    );
-  }
-
-  if (propValue[key] > 255 || propValue[key] < 0) {
-    return new Error(
-        'Invalid prop colors RGB supplied to' +
-        'Palette. Validation failed.'
-    );
-  }
-});
 
 const COPIED_TO_CLIPBOARD_MESSAGE_DELAY = 2000;
 
 const Palette = ({ colors }) => {
   const [wasCopied, setWasCopied] = useState(false);
+  const [appliedColor, setAppliedColor] = useState("");
   const handleMouseOver = useCallback(
     (color) => () => {
       document.body.style.backgroundColor = color;
+      setAppliedColor(color);
     },
     []
   );
@@ -52,13 +35,21 @@ const Palette = ({ colors }) => {
     <div className="palette-container">
       {colors.map((color) => (
         <span
-          className="palette"
+          className={`palette ${appliedColor === color ? "applied" : ""}`}
           key={`palette-${color}`}
-          onMouseOver={handleMouseOver(rgbArrayToRgb(color))}
-          onClick={handleClick(rgbArrayToRgb(color))}
-          style={{ backgroundColor: rgbArrayToRgb(color) }}
+          onMouseOver={handleMouseOver(color)}
+          onClick={handleClick(color)}
+          style={{ backgroundColor: color }}
         >
-          {rgbArrayToRgb(color) === wasCopied && <span className="copied-message">copied</span>}
+          <span
+            style={{
+              backgroundColor: wasCopied === color ? "black" : color,
+              color: wasCopied === color ? "#ccc" : color,
+            }}
+            className="copied-message"
+          >
+            copied
+          </span>
         </span>
       ))}
     </div>
@@ -66,7 +57,7 @@ const Palette = ({ colors }) => {
 };
 
 Palette.propTypes = {
-  colors: PropTypes.arrayOf(RgbType),
+  colors: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Palette;

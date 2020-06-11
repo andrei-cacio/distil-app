@@ -3,6 +3,7 @@
     display: flex;
     width: 500px;
     flex-wrap: wrap;
+    transition: all 0.5s;
 }
 
 .palette {
@@ -10,18 +11,27 @@
     height: 100px;
     display: flex;
     margin: 5px;
+    cursor: pointer;
     border-radius: 8px;
     transition: all 0.5s;
+    box-sizing: border-box;
+}
+
+.palette.applied {
+    border: 3px solid #ccc;
 }
 
 .palette:hover {
     transition: none;
     border: 3px solid black;
-    box-sizing: border-box;
 }
 
 .palette .copied-message {
     margin: auto;
+    transition: all 0.5s;
+    padding: 3px;
+    border-radius: 4px;
+    pointer-events: none;
 }
 
 
