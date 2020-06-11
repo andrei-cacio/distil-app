@@ -40,7 +40,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "distil": "file:../distil-wasm/pkg",
+    "distil": "^0.3.0",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
