@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import PropTypes from 'prop-types';
 import "./drop-area.css";
-import {blobToBuffer} from "./utils";
+import {blobToBuffer, blobToImage} from "./utils";
 
 const DROP_STATES = {
   HOVER: "HOVER",
@@ -15,6 +15,7 @@ const DROP_STATES_STYLES = {
 
 const DropArea = ({ allowedFiles, onFile }) => {
   const [dropState, setDropState] = useState(DROP_STATES.IDLE);
+  const dropAreaRef = useRef(null);
 
   const handleDragEnter = useCallback(e => {
     e.stopPropagation();
@@ -35,6 +36,9 @@ const DropArea = ({ allowedFiles, onFile }) => {
     const file = e.dataTransfer.files[0];
 
     if (allowedFiles.includes(file.type)) {
+      blobToImage(file).then(img => {
+        dropAreaRef.current.style.backgroundImage = `url(${img})`;
+      });
       blobToBuffer(file).then(buffer => onFile(buffer));
     } else {
       alert('Only JPEG allowed');
@@ -43,6 +47,7 @@ const DropArea = ({ allowedFiles, onFile }) => {
 
   return (
     <div
+      ref={dropAreaRef}
       onDrop={handleDrop}
       onDragEnd={handleDragLeave}
       onDragLeave={handleDragLeave}
